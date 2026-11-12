@@ -1,0 +1,25 @@
+name: Проверка сборки
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Получить код
+        uses: actions/checkout@v7
+
+      - name: Установить Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+
+      - name: Установить Zensical
+        run: pip install zensical
+
+      - name: Собрать сайт
+        run: zensical build --clean
